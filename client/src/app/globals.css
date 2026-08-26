@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Highlights — design tokens (dark + one accent)
+   ============================================================ */
+
+:root {
+  --ink: #0b0e14;
+  --panel: #12161f;
+  --panel-2: #171d29;
+  --line: #232b3a;
+  --fog: #9aa6b8;
+  --paper: #e9edf4;
+  --signal: #4f7cff;
+  --danger: #ff5c5c;
+  --pending: #e8b64c;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-line: var(--line);
+  --color-fog: var(--fog);
+  --color-paper: var(--paper);
+  --color-signal: var(--signal);
+  --color-danger: var(--danger);
+  --color-pending: var(--pending);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

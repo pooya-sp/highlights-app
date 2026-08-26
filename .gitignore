@@ -1,0 +1,35 @@
+# ===== Dependencies =====
+node_modules/
+.pnpm-store/
+
+# ===== Build outputs =====
+dist/
+.next/
+out/
+*.tsbuildinfo
+
+# ===== Environment files (SECRETS — never commit) =====
+.env
+.env.*
+!.env.example
+
+# ===== Project working docs (assistant notes, not part of the repo) =====
+CONTEXT.md
+highlights-app-plan.md
+frontend-design-plan.md
+slice1-auth-guide.md
+
+# ===== Logs & misc =====
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+
+# ===== Test artifacts =====
+coverage/
+.mongodb-binaries/
+
+# ===== Editor =====
+.vscode/
+.idea/
