@@ -9,7 +9,9 @@ import type {
 // api.ts — Pure fetch helper for server-side & client-side communication
 // =====================================================================
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:20000";
+// Strip any trailing slash so we never get double-slash in the URL.
+// e.g. "https://example.railway.app/" → "https://example.railway.app"
+const BASE_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:20000").replace(/\/+$/, "");
 
 interface RequestOptions {
   method?: string;

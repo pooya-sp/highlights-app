@@ -5,7 +5,7 @@ loadEnv({ path: ".env" });
 import app from "./src/app.js";
 import { startDailyRecheck } from "./src/jobs/dailyRecheck.js";
 
-const PORT = 20000;
+const PORT = process.env.PORT || 20000;
 const DB = process.env.DATABASE_URL;
 
 if (!DB) {
@@ -22,5 +22,5 @@ mongoose
   .catch((err) => console.error("❌ DB connection error:", err));
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server is listening on http://localhost:${PORT}`);
+  console.log(`🚀 Server is listening on :${PORT}`);
 });
