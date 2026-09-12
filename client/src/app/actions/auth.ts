@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { api } from "@/lib/api";
 
 const COOKIE_NAME = "hl_token";
+const UID_COOKIE_NAME = "hl_uid";
 
 export async function loginAction(
   _prevState: { error: string | null } | null,
@@ -24,6 +25,13 @@ export async function loginAction(
     const cookieStore = await cookies();
     cookieStore.set(COOKIE_NAME, token, {
       httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+    });
+    cookieStore.set(UID_COOKIE_NAME, res.data.user.id, {
+      httpOnly: false,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
@@ -59,6 +67,13 @@ export async function registerAction(
       path: "/",
       maxAge: 60 * 60 * 24 * 7, // 7 days
     });
+    cookieStore.set(UID_COOKIE_NAME, res.data.user.id, {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+    });
   } catch (err) {
     return {
       error: err instanceof Error ? err.message : "Registration failed",
@@ -71,5 +86,6 @@ export async function registerAction(
 export async function logoutAction() {
   const cookieStore = await cookies();
   cookieStore.delete(COOKIE_NAME);
+  cookieStore.delete(UID_COOKIE_NAME);
   redirect("/login");
 }

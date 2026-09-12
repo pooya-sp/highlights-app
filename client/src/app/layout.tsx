@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
@@ -31,7 +32,10 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-ink text-paper">{children}</body>
+      <body className="min-h-full bg-ink text-paper">
+        {children}
+        <ServiceWorkerRegistration />
+      </body>
     </html>
   );
 }

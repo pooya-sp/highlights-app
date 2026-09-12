@@ -8,6 +8,7 @@ import { SearchInput } from "@/components/dashboard/SearchInput";
 import { CounterStrip, type Filter } from "@/components/dashboard/CounterStrip";
 import { TagFilterBar } from "@/components/dashboard/TagFilterBar";
 import { LinkCard } from "@/components/LinkCard";
+import { OfflineLinks, LinksCacheSync } from "@/components/dashboard/OfflineLinks";
 import { LogoutButton } from "@/components/dashboard/LogoutButton";
 
 interface PageProps {
@@ -111,9 +112,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
       />
 
       {fetchError ? (
-        <div className="rounded-lg border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">
-          {fetchError}
-        </div>
+        <OfflineLinks fetchError={fetchError} />
       ) : links.length === 0 ? (
         <div className="py-16 text-center">
           <p className="font-display text-lg text-paper">
@@ -137,6 +136,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
         </div>
       ) : (
         <div className="space-y-3">
+          <LinksCacheSync links={links} />
           {links.map((link) => (
             <LinkCard key={link._id} link={link} />
           ))}
