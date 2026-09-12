@@ -1,4 +1,4 @@
-const CACHE_NAME = "highlights-app-v1";
+const CACHE_NAME = "highlights-app-v2";
 
 const OFFLINE_URL = "/offline.html";
 
@@ -57,6 +57,19 @@ self.addEventListener("fetch", (event) => {
         return caches.match(event.request).then((cachedResponse) => {
           if (cachedResponse) {
             return cachedResponse;
+          }
+
+          // For HTML navigation requests, try matching /dashboard or ignoring query params
+          if (event.request.mode === "navigate") {
+            return caches
+              .match(event.request, { ignoreSearch: true })
+              .then((searchMatch) => {
+                if (searchMatch) return searchMatch;
+                return caches.match("/dashboard").then((dashMatch) => {
+                  if (dashMatch) return dashMatch;
+                  return caches.match(OFFLINE_URL);
+                });
+              });
           }
 
           return caches.match(OFFLINE_URL);

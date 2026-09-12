@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     description:
       "Save links, check if they are alive, and keep a preview of everything you want to read later.",
     id: "/",
-    start_url: "/",
+    start_url: "/dashboard",
     display: "standalone",
     background_color: "#0b0e14",
     theme_color: "#0b0e14",
